@@ -1,0 +1,73 @@
+# .gitignore
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.history/
+.vscode-settings.json
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.parcelrc
+
+# Logs
+logs/
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.cache/
+.env.*.cache
+*.pem
+*.key
+
+# Backend specific
+backend/uploads/
+backend/.env
+backend/node_modules/
+
+# Frontend specific
+frontend/.env
+frontend/node_modules/
+frontend/dist/

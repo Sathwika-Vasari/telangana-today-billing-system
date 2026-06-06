@@ -1,176 +1,104 @@
-# Telangana Today - Advertiser Account & Campaign Billing System
+# Telangana Today - Advertiser Billing System
 
-A comprehensive full-stack web application for managing advertiser accounts, campaigns, billing, and payments for Telangana Today media organization.
-
-## 📋 Table of Contents
-
-- [Project Overview](#project-overview)
-- [Tech Stack](#tech-stack)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Running the Application](#running-the-application)
-- [API Documentation](#api-documentation)
-- [Database Schema](#database-schema)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Documentation](#documentation)
+A comprehensive full-stack billing management system for Telangana Today newspaper, enabling efficient tracking of advertiser campaigns, payments, renewals, and automated alerts.
 
 ## 🎯 Project Overview
 
-### Business Problem
+This system streamlines the billing operations for advertising campaigns with features including:
+- **Advertiser Management**: Track advertiser details and statuses
+- **Campaign Management**: Create and manage advertising campaigns
+- **Payment Processing**: Record and track payments with multiple payment methods
+- **Automated Alerts**: Renewal reminders and payment notifications
+- **Reporting Dashboard**: Visual analytics and financial summaries
+- **Role-based Access Control**: Admin and staff user roles
 
-Telangana Today manages advertiser accounts manually through:
-- Spreadsheets
-- WhatsApp messages
-- Paper records
-
-### Problems Solved
-
-- ✅ Centralized account management system
-- ✅ Real-time campaign tracking
-- ✅ Automated payment tracking
-- ✅ Renewal date alerts
-- ✅ Automated alert engine
-- ✅ Real-time analytics dashboard
-- ✅ Comprehensive reporting
-
-## 🛠 Tech Stack
-
-### Frontend
-- **React.js 18** - UI library
-- **React Router v6** - Client-side routing
-- **Axios** - HTTP client
-- **Tailwind CSS** - Styling
-- **Recharts** - Data visualization
+## 📋 Tech Stack
 
 ### Backend
-- **Node.js** - Runtime
-- **Express.js** - Web framework
-- **JWT** - Authentication
-- **PostgreSQL** - Database
-- **Nodemon** - Development utility
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MySQL
+- **Authentication**: JWT
+- **Task Scheduling**: node-cron
+- **Logging**: Morgan
+- **Validation**: Express-validator
 
-### Database
-- **PostgreSQL** - Relational database
-- **Supabase** (Production) - Managed PostgreSQL
+### Frontend
+- **Library**: React 18.2
+- **Build Tool**: Vite
+- **Routing**: React Router v6
+- **Styling**: Tailwind CSS
+- **HTTP Client**: Axios
+- **Charts**: Recharts
 
-### Deployment
-- **Frontend** → Vercel
-- **Backend** → Render
-- **Database** → Supabase PostgreSQL
+## 🚀 Getting Started
 
-## ✨ Features
+### Prerequisites
+- Node.js v16+ and npm
+- MySQL 5.7+
+- Git
 
-### 1. Authentication & Authorization
-- Admin and Staff roles
-- JWT-based authentication
-- Protected routes
-- Role-based access control
+### Installation
 
-### 2. Dashboard
-- Total advertisers count
-- Active campaigns count
-- Revenue generated
-- Pending payments
-- Upcoming renewals
-- Critical alerts display
+#### Backend Setup
 
-### 3. Advertiser Management
-- Create, read, update, delete advertisers
-- Search functionality
-- Filter by status
-- Pagination
-- Contact information management
+```bash
+cd backend
+npm install
+```
 
-### 4. Campaign Management
-- Create, read, update, delete campaigns
-- Campaign status tracking
-- Booking date management
-- Start/end date configuration
-- Automatic renewal date calculation
-- Search and filter capabilities
+Create a `.env` file in the backend directory:
 
-### 5. Payment & Billing
-- Invoice generation
-- Payment status tracking
-- Mark payments as paid/pending
-- Payment history
-- Overdue payment alerts
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=telangana_today_billing
+DB_PORT=3306
+PORT=5000
+NODE_ENV=development
+JWT_SECRET=your_jwt_secret_key_here
+JWT_EXPIRE=7d
+FRONTEND_URL=http://localhost:3000
+```
 
-### 6. Reports & Analytics
-- Revenue trends chart
-- Campaign status breakdown
-- Monthly revenue analysis
-- Advertiser performance metrics
-- Export capabilities
+Start the backend server:
 
-### 7. Alert Engine
-- 30-day pre-renewal alerts
-- 15-day pre-renewal alerts
-- 7-day pre-renewal alerts
-- Renewal date alerts
-- Pending payment alerts
-- Overdue payment alerts
+```bash
+npm run dev
+```
 
-### 8. Notifications
-- Real-time notification display
-- Notification history
-- Notification filtering
+#### Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env` file in the frontend directory:
+
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_ENV=development
+REACT_APP_APP_NAME=Telangana Today - Billing System
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The frontend will be available at `http://localhost:3000`
 
 ## 📁 Project Structure
 
 ```
 telangana-today-billing-system/
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Sidebar.jsx
-│   │   │   ├── Card.jsx
-│   │   │   ├── Modal.jsx
-│   │   │   └── ...
-│   │   ├── pages/
-│   │   │   ├── Login.jsx
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Advertisers.jsx
-│   │   │   ├── Campaigns.jsx
-│   │   │   ├── Payments.jsx
-│   │   │   ├── Reports.jsx
-│   │   │   ├── Notifications.jsx
-│   │   │   └── Profile.jsx
-│   │   ├── services/
-│   │   │   ├── api.js
-│   │   │   ├── authService.js
-│   │   │   ├── advertiserService.js
-│   │   │   ├── campaignService.js
-│   │   │   ├── paymentService.js
-│   │   │   ├── reportService.js
-│   │   │   └── notificationService.js
-│   │   ├── hooks/
-│   │   │   ├── useAuth.js
-│   │   │   └── useAlert.js
-│   │   ├── layouts/
-│   │   │   ├── MainLayout.jsx
-│   │   │   └── AuthLayout.jsx
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   └── index.jsx
-│   ├── package.json
-│   ├── tailwind.config.js
-│   └── .env.example
-│
 ├── backend/
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── advertiserController.js
-│   │   ├── campaignController.js
-│   │   ├── paymentController.js
-│   │   ├── reportController.js
-│   │   ├── dashboardController.js
-│   │   └── notificationController.js
+│   ├── server.js
+│   ├── middleware/
+│   │   └── errorHandler.js
 │   ├── routes/
 │   │   ├── authRoutes.js
 │   │   ├── advertiserRoutes.js
@@ -180,431 +108,250 @@ telangana-today-billing-system/
 │   │   ├── dashboardRoutes.js
 │   │   └── notificationRoutes.js
 │   ├── models/
-│   │   ├── User.js
-│   │   ├── Advertiser.js
-│   │   ├── Campaign.js
-│   │   ├── Payment.js
-│   │   ├── Notification.js
-│   │   └── AuditLog.js
-│   ├── middleware/
-│   │   ├── auth.js
-│   │   ├── validation.js
-│   │   └── errorHandler.js
+│   ├── controllers/
 │   ├── services/
-│   │   ├── alertService.js
-│   │   ├── emailService.js
-│   │   └── reportService.js
-│   ├── config/
-│   │   ├── database.js
-│   │   └── constants.js
-│   ├── migrations/
-│   │   └── migration files
-│   ├── tests/
-│   │   ├── auth.test.js
-│   │   ├── advertiser.test.js
-│   │   ├── campaign.test.js
-│   │   ├── payment.test.js
-│   │   └── api.test.js
-│   ├── server.js
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── AlertContainer.jsx
+│   │   │   └── ProtectedRoute.jsx
+│   │   ├── pages/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Advertisers.jsx
+│   │   │   ├── Campaigns.jsx
+│   │   │   └── Payments.jsx
+│   │   ├── services/
+│   │   │   ├── api.js
+│   │   │   ├── authService.js
+│   │   │   ├── advertiserService.js
+│   │   │   ├── campaignService.js
+│   │   │   ├── paymentService.js
+│   │   │   ├── reportService.js
+│   │   │   ├── dashboardService.js
+│   │   │   └── notificationService.js
+│   │   ├── hooks/
+│   │   │   ├── useAuth.js
+│   │   │   └── useAlert.js
+│   │   ├── App.jsx
+│   │   ├── index.jsx
+│   │   └── index.css
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   ├── postcss.config.js
 │   ├── package.json
 │   └── .env.example
-│
-├── database/
-│   ├── schema.sql
-│   ├── seed.sql
-│   └── migrations/
-│
-├── docs/
-│   ├── API_DOCUMENTATION.md
-│   ├── DATABASE_SCHEMA.md
-│   ├── DEPLOYMENT_GUIDE.md
-│   ├── TESTING_REPORT.md
-│   ├── ARCHITECTURE.md
-│   ├── ER_DIAGRAM.md
-│   ├── PROJECT_REPORT.md
-│   └── DEMO_SCRIPT.md
-│
-├── docker-compose.yml
-├── .github/
-│   └── workflows/
-│       ├── deploy-frontend.yml
-│       └── deploy-backend.yml
-│
-└── DEPLOYMENT.md
-
+└── README.md
 ```
 
-## 🚀 Installation
+## 🔑 Key Features
 
-### Prerequisites
-- Node.js v16+
-- PostgreSQL 12+
-- Git
-- npm or yarn
+### 1. Authentication & Authorization
+- User registration and login with JWT tokens
+- Role-based access control (Admin, Manager, Staff)
+- Secure token storage and automatic logout on unauthorized access
 
-### Step 1: Clone Repository
-```bash
-git clone https://github.com/Sathwika-Vasari/telangana-today-billing-system.git
-cd telangana-today-billing-system
-```
+### 2. Advertiser Management
+- Add, update, and delete advertiser profiles
+- Track advertiser contact information and status
+- Search and filter advertisers
 
-### Step 2: Install Backend Dependencies
-```bash
-cd backend
-npm install
-```
+### 3. Campaign Management
+- Create and manage advertising campaigns
+- Track campaign status (active, paused, completed, cancelled)
+- Multiple ad types support (Banner, Video, Text, Display, Social Media, Email)
+- Automated billing amount calculation
 
-### Step 3: Install Frontend Dependencies
-```bash
-cd ../frontend
-npm install
-```
+### 4. Payment Processing
+- Record payments with multiple methods (bank transfer, check, cash, credit card, online)
+- Track payment status and due dates
+- Payment reconciliation
+- Late payment alerts
 
-### Step 4: Setup Database
-```bash
-cd ../database
-# Create PostgreSQL database
-createdb telangana_today_db
+### 5. Reporting & Analytics
+- Revenue analysis by period
+- Campaign status reports
+- Payment status dashboard
+- Renewal alerts and tracking
+- Interactive charts and visualizations
 
-# Run schema
-psql telangana_today_db < schema.sql
+### 6. Automated Alerts
+- Renewal reminders (daily at 6 AM)
+- Payment alerts (daily at 9 AM)
+- Campaign status updates (daily at 12 PM)
+- In-app notification system
 
-# Seed sample data
-psql telangana_today_db < seed.sql
-```
+## 📊 API Endpoints
 
-## ⚙️ Configuration
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/profile` - Get current user profile
 
-### Backend .env
-```
-# Server
-PORT=5000
-NODE_ENV=development
+### Advertisers
+- `GET /api/advertisers` - List all advertisers
+- `GET /api/advertisers/:id` - Get advertiser details
+- `POST /api/advertisers` - Create new advertiser
+- `PUT /api/advertisers/:id` - Update advertiser
+- `DELETE /api/advertisers/:id` - Delete advertiser
 
-# Database
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_NAME=telangana_today_db
+### Campaigns
+- `GET /api/campaigns` - List campaigns
+- `GET /api/campaigns/:id` - Get campaign details
+- `POST /api/campaigns` - Create campaign
+- `PUT /api/campaigns/:id` - Update campaign
+- `DELETE /api/campaigns/:id` - Delete campaign
 
-# JWT
-JWT_SECRET=your_jwt_secret_key
-JWT_EXPIRE=7d
+### Payments
+- `GET /api/payments` - List payments
+- `GET /api/payments/:id` - Get payment details
+- `POST /api/payments` - Record payment
+- `PUT /api/payments/:id` - Update payment
 
-# Email (Optional)
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_app_password
+### Reports
+- `GET /api/reports/summary` - Financial summary
+- `GET /api/reports/revenue` - Revenue analysis
+- `GET /api/reports/campaign-status` - Campaign status report
+- `GET /api/reports/renewals` - Renewal information
 
-# CORS
-FRONTEND_URL=http://localhost:3000
-```
+### Dashboard
+- `GET /api/dashboard/summary` - Dashboard metrics and alerts
 
-### Frontend .env
-```
-REACT_APP_API_URL=http://localhost:5000/api
-REACT_APP_ENV=development
-```
-
-## 🏃 Running the Application
-
-### Terminal 1: Start Backend Server
-```bash
-cd backend
-npm run dev
-# Server runs on http://localhost:5000
-```
-
-### Terminal 2: Start Frontend Server
-```bash
-cd frontend
-npm start
-# Application opens on http://localhost:3000
-```
-
-## 📖 API Documentation
-
-### Base URL
-```
-http://localhost:5000/api
-```
-
-### Authentication Endpoints
-
-#### Register User
-```
-POST /auth/register
-Body: {
-  "email": "user@example.com",
-  "password": "password123",
-  "name": "User Name",
-  "role": "admin" | "staff"
-}
-```
-
-#### Login
-```
-POST /auth/login
-Body: {
-  "email": "user@example.com",
-  "password": "password123"
-}
-Response: {
-  "token": "jwt_token",
-  "user": { ... }
-}
-```
-
-#### Get Profile
-```
-GET /auth/profile
-Headers: { "Authorization": "Bearer token" }
-```
-
-### Advertiser Endpoints
-
-#### Get All Advertisers
-```
-GET /advertisers?page=1&limit=10&search=&status=
-```
-
-#### Get Single Advertiser
-```
-GET /advertisers/:id
-```
-
-#### Create Advertiser
-```
-POST /advertisers
-Body: {
-  "name": "Company Name",
-  "email": "contact@company.com",
-  "phone": "9876543210",
-  "address": "Address",
-  "city": "City",
-  "state": "State",
-  "pincode": "123456",
-  "status": "active"
-}
-```
-
-#### Update Advertiser
-```
-PUT /advertisers/:id
-Body: { ...updated fields }
-```
-
-#### Delete Advertiser
-```
-DELETE /advertisers/:id
-```
-
-### Campaign Endpoints
-
-#### Get All Campaigns
-```
-GET /campaigns?page=1&limit=10&status=&advertiser_id=
-```
-
-#### Create Campaign
-```
-POST /campaigns
-Body: {
-  "name": "Campaign Name",
-  "advertiser_id": 1,
-  "ad_type": "Banner|Video|Text",
-  "booking_date": "2024-01-15",
-  "start_date": "2024-01-20",
-  "end_date": "2024-02-20",
-  "billing_amount": 50000,
-  "status": "active|paused|completed"
-}
-```
-
-#### Update Campaign
-```
-PUT /campaigns/:id
-Body: { ...updated fields }
-```
-
-#### Delete Campaign
-```
-DELETE /campaigns/:id
-```
-
-### Payment Endpoints
-
-#### Get All Payments
-```
-GET /payments?page=1&limit=10&status=
-```
-
-#### Create Payment
-```
-POST /payments
-Body: {
-  "campaign_id": 1,
-  "amount": 50000,
-  "payment_date": "2024-01-20",
-  "payment_method": "bank_transfer|check|cash",
-  "reference_number": "REF123",
-  "status": "paid|pending|failed"
-}
-```
-
-#### Update Payment Status
-```
-PUT /payments/:id
-Body: {
-  "status": "paid|pending|failed"
-}
-```
-
-### Report Endpoints
-
-#### Get Summary Report
-```
-GET /reports/summary
-Response: {
-  "total_advertisers": 50,
-  "active_campaigns": 25,
-  "total_revenue": 5000000,
-  "pending_payments": 500000,
-  "upcoming_renewals": 10
-}
-```
-
-#### Get Revenue Report
-```
-GET /reports/revenue?period=month|year
-```
-
-#### Get Campaign Status Report
-```
-GET /reports/campaign-status
-```
-
-#### Get Renewal Report
-```
-GET /reports/renewals?days=30
-```
-
-### Dashboard Endpoints
-
-#### Get Dashboard Summary
-```
-GET /dashboard/summary
-Response: {
-  "metrics": { ... },
-  "alerts": [ ... ],
-  "recent_activities": [ ... ]
-}
-```
+### Notifications
+- `GET /api/notifications` - Get user notifications
+- `PUT /api/notifications/:id/read` - Mark as read
+- `PUT /api/notifications/all/read` - Mark all as read
 
 ## 🗄️ Database Schema
 
-### Tables
+### Main Tables
+- **users** - User accounts with roles
+- **advertisers** - Advertiser information
+- **campaigns** - Campaign details
+- **payments** - Payment records
+- **alerts** - System alerts and notifications
+- **audit_logs** - Activity tracking
 
-1. **users**
-   - Stores admin and staff user accounts
-   - Fields: id, email, password, name, role, created_at
+## 📱 Features by User Role
 
-2. **advertisers**
-   - Advertiser company information
-   - Fields: id, name, email, phone, address, city, state, pincode, status, created_at, updated_at
+### Admin
+- Full system access
+- User management
+- Audit logs viewing
+- System configuration
 
-3. **campaigns**
-   - Campaign details
-   - Fields: id, advertiser_id, name, ad_type, booking_date, start_date, end_date, billing_amount, status, renewal_date, created_at, updated_at
+### Manager
+- Advertiser management
+- Campaign oversight
+- Payment reconciliation
+- Report generation
 
-4. **payments**
-   - Payment records
-   - Fields: id, campaign_id, amount, payment_date, payment_method, reference_number, status, created_at, updated_at
+### Staff
+- View assigned advertisers
+- Record payments
+- View own tasks and notifications
 
-5. **notifications**
-   - Alert notifications
-   - Fields: id, user_id, campaign_id, type, message, is_read, created_at
+## 🔒 Security Features
 
-6. **audit_logs**
-   - Activity tracking
-   - Fields: id, user_id, action, entity_type, entity_id, old_value, new_value, created_at
+- JWT-based authentication
+- Password encryption with bcrypt
+- CORS protection
+- Input validation and sanitization
+- SQL injection prevention with parameterized queries
+- XSS protection
+- Audit logging for all actions
+
+## 📈 Performance Optimizations
+
+- Database query optimization with indexes
+- API response caching
+- Pagination for large datasets
+- Frontend code splitting with Vite
+- Lazy loading of components
 
 ## 🧪 Testing
 
-### Run Unit Tests
+### Backend Testing
 ```bash
 cd backend
 npm test
 ```
 
-### Run Integration Tests
+### Frontend Testing
 ```bash
-npm run test:integration
+cd frontend
+npm test
 ```
 
-### Run API Tests
+## 📦 Deployment
+
+### Production Build
+
+#### Backend
 ```bash
-npm run test:api
+cd backend
+npm run build
+npm start
 ```
 
-### Test Coverage
-```bash
-npm run test:coverage
-```
-
-### Postman Collection
-Import `postman-collection.json` in Postman for API testing.
-
-## 📊 Reports & Documentation
-
-All documentation is available in the `docs/` folder:
-
-- **API_DOCUMENTATION.md** - Complete API reference
-- **DATABASE_SCHEMA.md** - Database design details
-- **ARCHITECTURE.md** - System architecture
-- **ER_DIAGRAM.md** - Entity relationship diagram
-- **DEPLOYMENT_GUIDE.md** - Production deployment
-- **TESTING_REPORT.md** - Test results
-- **PROJECT_REPORT.md** - Complete project report
-- **DEMO_SCRIPT.md** - Demonstration walkthrough
-
-## 🚀 Deployment
-
-### Frontend Deployment (Vercel)
+#### Frontend
 ```bash
 cd frontend
 npm run build
-# Deploy build folder to Vercel
 ```
 
-### Backend Deployment (Render)
-```bash
-cd backend
-# Configure environment variables on Render
-# Deploy repository to Render
-```
+## 🐛 Troubleshooting
 
-### Database (Supabase PostgreSQL)
-```bash
-# Create Supabase project
-# Update database credentials in backend .env
-# Run migrations on Supabase
-```
+### Common Issues
 
-See `DEPLOYMENT.md` for detailed instructions.
+1. **Database Connection Error**
+   - Verify MySQL is running
+   - Check DB credentials in `.env`
+   - Ensure database exists
 
-## 📝 License
+2. **Port Already in Use**
+   - Change `PORT` in backend `.env`
+   - Restart the server
 
-This project is proprietary software for Telangana Today.
+3. **CORS Errors**
+   - Verify `FRONTEND_URL` in backend `.env`
+   - Check frontend and backend URLs match
+
+4. **API Connection Issues**
+   - Verify backend is running on correct port
+   - Check `REACT_APP_API_URL` in frontend `.env`
+
+## 📚 Documentation
+
+- [Backend API Documentation](./backend/API.md)
+- [Database Schema](./backend/DATABASE.md)
+- [Frontend Component Guide](./frontend/COMPONENTS.md)
+
+## 🤝 Contributing
+
+1. Create a feature branch (`git checkout -b feature/amazing-feature`)
+2. Commit changes (`git commit -m 'Add amazing feature'`)
+3. Push to branch (`git push origin feature/amazing-feature`)
+4. Open a Pull Request
+
+## 📄 License
+
+This project is proprietary to Telangana Today.
 
 ## 👥 Support
 
-For issues or questions, contact the development team.
+For issues or questions, please contact the development team.
+
+## 🎉 Acknowledgments
+
+- Built with React, Node.js, and MySQL
+- UI designed with Tailwind CSS
+- Charts powered by Recharts
 
 ---
 
-**Last Updated:** June 2024
-**Version:** 1.0.0
-**Status:** Production Ready
+**Last Updated**: June 2026
